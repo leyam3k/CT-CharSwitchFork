@@ -1,33 +1,42 @@
-# SillyTavern Extension Example
+# CozyTavern Character Switcher (Fork)
 
-_Provide a brief description of how your extension works, what problem it aims to solve._
+A unified quick switcher for characters and groups, conveniently integrated into the chat input bar of SillyTavern/CozyTavern. This fork (CT-CharSwitchFork) reimagines the UI with a purple-ish glassmorphism theme and improved positioning.
 
 ## Features
 
-_Describe some of the main selling points of your extension._
+- **Unified Access**: Browse both Characters and Groups in a single, easy-to-navigate list.
+- **Smart Views**: Quickly toggle between **Recents** (default), **Favorites**, and **All** entities.
+- **Search & Seek**: Instantly filter by name using the search bar or jump to a letter using the A-Z seek bar.
+- **Local Randomizer**: Click the dice button (🎲) to instantly switch to a random character from your current filtered view.
+- **Integrated Design**: Sits neatly in the chat input bar as a book icon, using a distinct purple theme with glassmorphism effects.
 
 ## Installation and Usage
 
 ### Installation
 
-_In most cases, this should just be using ST's inbuilt extension installer._
+1.  Open SillyTavern.
+2.  Navigate to **Extensions** > **Install Extension**.
+3.  Paste the repository URL: `https://github.com/leyam3k/CT-CharSwitchFork`
+4.  Click **Install**.
 
 ### Usage
 
-_Explain how to use this extension._
+1.  Look for the **Book Icon** button in your chat input bar (near the send button area).
+2.  Click it to open the switcher popup.
+3.  **Tabs**: Switch between 'Recents', 'Favorites', and 'All' using the top buttons.
+4.  **Search**: Type in the search box to filter the list.
+5.  **Seek**: Click a letter on the right side to jump to that section (visible in 'Favorites' and 'All' views).
+6.  **Switch**: Click on any character or group to switch to them immediately.
+7.  **Random**: Click the 🎲 button next to the search bar to let fate decide your next chat partner from the current list.
 
 ## Prerequisites
 
-_Specify the version of ST necessary here._
+- SillyTavern (Latest release recommended)
 
 ## Support and Contributions
 
-_Where should someone ask for support?_
-
-_Consider including your own contact info for help/questions._
-
-_How can people help add to this extension?_
+If you encounter any issues or have suggestions, please open an issue on the GitHub repository.
 
 ## License
 
-_Be cool, use an open source license._
+This project is open-source.
