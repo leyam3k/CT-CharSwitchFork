@@ -1,23 +1,13 @@
 /* ─── CT-CharSwitch (Pop-up Layout) ───────────────────────── */
 
-/* --- Main Button (Input Bar Position) --- */
-#ct-charswitch-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  margin: 0 5px;
-  text-align: center;
-  transition: all 0.2s ease;
-  opacity: 0.8;
-  color: #e6dcd9;
-  order: 4;
-}
+/* --- Main Button (Now in CTSidebarButtons) --- */
+/* Button is managed by CTSidebarButtons extension */
+/* This section kept for reference - button ID is #ct-sidebar-btn-ct-charswitch */
 
-#ct-charswitch-btn:hover {
-  opacity: 1;
+/* Additional styling for the button in sidebar */
+#ct-sidebar-btn-ct-charswitch {
+  /* Button inherits .ct-sidebar-button styles from CTSidebarButtons */
+  /* Add any custom overrides here if needed */
 }
 
 /* --- Backdrop --- */

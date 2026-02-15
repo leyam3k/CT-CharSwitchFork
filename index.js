@@ -23,17 +23,35 @@ jQuery(() => {
   let currentSearchTerm = "";
   let currentActiveEntity = null;
 
-  // ---------------------------------------------------------------------------------
-  //  DOM Element Creation
-  // ---------------------------------------------------------------------------------
-  const $switchBtn = $(
-    '<div id="ct-charswitch-btn" class="interactable" title="Quick Character Switch" tabindex="0"><i class="fa-solid fa-address-book"></i></div>'
-  );
+  // Button ID used in CTSidebarButtons
+  const BUTTON_ID = "ct-charswitch";
+  const BUTTON_SELECTOR = "#ct-sidebar-btn-" + BUTTON_ID;
 
-  const insertButton = () => {
-    if ($("#ct-charswitch-btn").length === 0) {
-      $("#leftSendForm").append($switchBtn);
+  // ---------------------------------------------------------------------------------
+  //  Button Registration with CTSidebarButtons
+  // ---------------------------------------------------------------------------------
+  const registerSidebarButton = () => {
+    // Check if CTSidebarButtons API is available
+    if (typeof window.CTSidebarButtons === "undefined") {
+      console.warn(
+        "CT-CharSwitch: CTSidebarButtons not found. Retrying in 500ms..."
+      );
+      setTimeout(registerSidebarButton, 500);
+      return;
     }
+
+    // Register button with CTSidebarButtons
+    window.CTSidebarButtons.registerButton({
+      id: BUTTON_ID,
+      icon: "fa-solid fa-address-book",
+      title: "Quick Character Switch",
+      order: 10,
+      onClick: () => {
+        isDropdownOpen ? closeDropdown() : createDropdownMenu();
+      },
+    });
+
+    console.log("CT-CharSwitch: Button registered with CTSidebarButtons");
   };
 
   // ---------------------------------------------------------------------------------
@@ -295,23 +313,40 @@ jQuery(() => {
     await populateListContainer();
     attachDropdownCloseHandlers();
 
-    // Initialize Popper
+    // Initialize Popper - use the button from CTSidebarButtons
+    const $sidebarBtn = $(BUTTON_SELECTOR);
+    if ($sidebarBtn.length === 0) {
+      console.error("CT-CharSwitch: Button not found in sidebar");
+      closeDropdown();
+      return;
+    }
+    
+    // Position dropdown to the left of sidebar buttons with spacing
+    // This provides better space utilization on smaller devices
     popper = Popper.createPopper(
-      document.getElementById("ct-charswitch-btn"),
+      $sidebarBtn[0],
       $dropdown[0],
       {
-        placement: "top-start",
+        placement: "left-start",
         modifiers: [
           {
             name: "offset",
             options: {
-              offset: [0, 10],
+              // [skid, distance] - positive skid moves down, distance adds horizontal spacing
+              // Position lower to align better with sidebar button position
+              offset: [150, 8],
             },
           },
           {
             name: "preventOverflow",
             options: {
               boundary: "viewport",
+            },
+          },
+          {
+            name: "flip",
+            options: {
+              fallbackPlacements: ["left-end", "right-start", "right-end"],
             },
           },
         ],
@@ -410,7 +445,7 @@ jQuery(() => {
       (e) => {
         if (
           isDropdownOpen &&
-          !$(e.target).closest(".ct-charswitch-dropdown, #ct-charswitch-btn")
+          !$(e.target).closest(`.ct-charswitch-dropdown, ${BUTTON_SELECTOR}`)
             .length
         ) {
           closeDropdown();
@@ -425,17 +460,15 @@ jQuery(() => {
     });
   };
 
-  $switchBtn.on("click", (e) => {
-    isDropdownOpen ? closeDropdown() : createDropdownMenu();
-  });
-
   eventSource.on(event_types.CHARACTER_EDITED, () => {
     if (isDropdownOpen) populateListContainer();
   });
 
-  insertButton();
+  // Register button with CTSidebarButtons on load
+  registerSidebarButton();
 
+  // Also try to register on APP_READY in case CTSidebarButtons loads later
   eventSource.on(event_types.APP_READY, () => {
-    insertButton();
+    registerSidebarButton();
   });
 });

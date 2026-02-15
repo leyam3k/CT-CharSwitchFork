@@ -37,6 +37,21 @@ A unified quick switcher for characters and groups, conveniently integrated into
 
 If you encounter any issues or have suggestions, please open an issue on the GitHub repository.
 
+## Changelog
+
+### v1.1.0
+- **Sidebar Integration**: Button now registers with CT-SidebarButtons extension instead of being placed in the leftSendForm
+- **Improved Dropdown Positioning**: Dropdown now appears to the left of the sidebar buttons with 8px spacing for better space utilization on smaller devices
+- **Smart Fallback Placement**: Added Popper flip modifier to automatically adjust position when viewport space is limited
+
+### v1.0.0
+- Initial fork release
+- Unified quick switcher for characters and groups
+- Purple glassmorphism theme
+- Smart views: Recents, Favorites, All
+- Search & A-Z seek bar functionality
+- Local randomizer (🎲) for random character selection
+
 ## License
 
 This project is open-source.
